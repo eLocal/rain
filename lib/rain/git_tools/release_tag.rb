@@ -29,7 +29,7 @@ module GitTools
 
     # Return the current ReleaseTag as specified in versions.yml.
     def self.current environment="production"
-      version = YAML.load_file(File.expand_path("../../../config/versions.yml", __FILE__))[environment]
+      version = YAML::load_file(Rain.versions)[environment]
       ReleaseTag.new(version)
     end
 

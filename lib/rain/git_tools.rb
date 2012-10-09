@@ -75,7 +75,7 @@ module GitTools
   end
 
   def versions_path
-    File.expand_path("../../config/versions.yml", __FILE__)
+    "#{Rails.root}/config/versions.yml"
   end
 
   def versions_hash
@@ -85,7 +85,7 @@ module GitTools
   def update_release_tag(environment, tag)
     hsh = versions_hash
     hsh[environment] = tag
-    File.write(versions_path, hsh.to_yaml)
+    File.write(Rain.versions, hsh.to_yaml)
     run_cmd "git commit -m '[RELEASE][#{environment}] Update release tag for #{environment} to #{tag}' #{versions_path}"
     run_cmd "git push"
   end

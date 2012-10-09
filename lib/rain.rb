@@ -8,5 +8,7 @@ require 'rain/deployer'
 #ENV['BUNDLE_GEMFILE'] ||= File.expand_path("../../Gemfile", Pathname.new(__FILE__).realpath)
 
 module Rain
-  # Make it rain...
+  def self.versions
+    "#{Rails.root}/config/versions.yml"
+  end
 end
