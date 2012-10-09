@@ -64,7 +64,14 @@ $ rain on production
 
 Rain uses [Semantic Versioning](http://semver.org), so it is possible to
 programatically increment the major or minor version instead of the
-patch. In a continuous deployment setting, it is best to establish rules
+patch, which is the default (but can be explicitly set with `--patch`).
+
+```bash
+$ rain on stage --minor
+$ rain on production --major
+```
+
+In a continuous deployment setting, it is best to establish rules
 for when minor or major versions are bumped. You can see the "best
 practice" rules established by semver.org if you run `rain help on`.
 
