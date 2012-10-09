@@ -37,7 +37,7 @@ module GitTools
     # recent "rel_*" tag created on Git.
     def self.latest
       tags = %x(git tag).split("\n").select{|l| l =~ /^rel_/}.map{ |l| ReleaseTag.new(l) }.sort
-      tags.last
+      tags.last || ReleaseTag.new('rel_0.0.0')
     end
   end
 end
