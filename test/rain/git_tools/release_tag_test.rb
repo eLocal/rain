@@ -1,5 +1,5 @@
 require 'test_helper'
 
-class Rain::GitTools::ReleaseTagTest < ActiveSupport::TestCase
+class ReleaseTagTest < ActiveSupport::TestCase
 
 end
