@@ -5,7 +5,7 @@ module Rain
     include Thor::Actions
     include GitTools
 
-    desc :to_stage, "Tag current branch and push it to stage"
+    desc :on, "Tag current HEAD and push it to the chosen environment."
     method_option :force, :type => :boolean,
       :desc => "Force a release to occur without any prompting", :aliases => "-f"
     method_option :"keep-current-version", :type => :boolean,
