@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
+#
+# = Rain
+#
+# Usage: `rain on {RAILS_ENV}`
+
 require 'rain'
+
 Rain::Deployer.start

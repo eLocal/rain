@@ -20,6 +20,4 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.8"
   s.add_dependency "thor"
   s.add_dependency "capistrano"
-
-  #s.add_development_dependency "sqlite3"
 end
