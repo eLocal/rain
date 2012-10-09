@@ -1,3 +1,6 @@
+![Make it rain](http://gifsoup.com/webroot/animatedgifs4/1474973_o.gif
+"Make it rain")
+
 # Rain
 
 Rain is a deployment engine for Rails applications. It leverages
