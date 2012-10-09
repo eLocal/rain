@@ -78,8 +78,8 @@ across all of our applications.
 
 ## Contributors
 
-- Tom Scott
-- Rob Di Marco
+- [Tom Scott](http://github.com/tubbo)
+- [Rob Di Marco](http://github.com/robdimarco)
 
 ## License
 
