@@ -4,6 +4,6 @@
 #
 # Usage: `rain on {RAILS_ENV}`
 
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 require 'rain'
-
 Rain::Deployer.start
