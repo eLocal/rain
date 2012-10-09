@@ -1,11 +1,45 @@
-require 'git_tools/release_tag'
+require 'thor'
+require_relative 'git_tools/release_tag'
 
 module GitTools
+  include Thor::Actions
+
   def working_directory_copasetic?
     return true if options[:force]
     return false unless no_changes_pending? || yes?("There are currently uncommitted changes.  Are you sure you want to continue? [y/N]")
     return false unless on_master? || yes?("You are not currently on the master branch.  Are you sure you want to continue? [y/N]")
     true
+  end
+
+  # Test whether we are currently using the master branch. All
+  # deployment activity should take place on the master branch.
+  def on_master?
+    out = %x(git symbolic-ref -q HEAD)
+    out.strip == "refs/heads/master"
+  end
+
+  # Test whether there are any uncommitted changes in the working
+  # directory.
+  def no_changes_pending?
+    %x(git status --porcelain).split("\n").length == 0
+  end
+
+  # Moved code to ReleaseTag. Basically returns a ReleaseTag with a version
+  # equal to the latest Git tag.
+  def last_release_tag
+    ReleaseTag.latest
+  end
+
+  # Display name as set in +~/.gitconfig+
+  def git_name
+    name = %x(git config --get user.name).split("\n")[0]
+  end
+
+  # Compares the latest Git tag with the latest version name in YAML. If
+  # both of those are equal, this returns +true+, because the Git tags
+  # are in sync with versions.yml
+  def tagged_latest_version?
+    ReleaseTag.latest == ReleaseTag.current
   end
 
   %w(major minor patch).each do |f|

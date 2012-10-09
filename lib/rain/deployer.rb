@@ -1,3 +1,5 @@
+require 'thor'
+
 module Rain
   class Deployer < Thor
     include Thor::Actions
