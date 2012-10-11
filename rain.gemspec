@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   using Capistrano to as many servers and environments as you wish."
   TEXT
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE.md", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
   s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
