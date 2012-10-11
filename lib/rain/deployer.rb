@@ -1,18 +1,18 @@
 require 'thor'
+require 'rain/semantic_version'
 
 module Rain
   class Deployer < Thor
     include Thor::Actions
     include GitTools
 
-    desc :on, "Tag current HEAD and push it to the chosen environment."
-    method_option :force, :type => :boolean,
-      :desc => "Force a release to occur without any prompting", :aliases => "-f"
-    method_option :"keep-current-version", :type => :boolean,
-      :desc => "Do not create a new tag, just reuse the previous tag", :aliases => "-k"
-    method_option :patch, default: true,  desc: "Patch versions are incremented if only backwards compatible bug fixes are introduced. A bug fix is defined as an internal change that fixes incorrect behavior."
-    method_option :minor, default: false, desc: "Minor versions are incremented if new, backwards compatible functionality is introduced to the public API, or if older functionality is deprecated."
-    method_option :major, default: false, desc: "Major versions are incremented if any backwards incompatible changes are introduced to the public API. It MAY include minor and patch level changes."
+    desc :on, "Tag current HEAD and push it to the chosen environment. (default: 'production')"
+    method_option :force, type: :boolean, desc: "Force a release, do not prompt", aliases: "-f"
+    method_option :"keep-current-version", type: :boolean, desc: "Reuse the previous tag", aliases: "-k"
+    method_option :patch, default: true,  desc: SemanticVersion::PATCH
+    method_option :minor, default: false, desc: SemanticVersion::MINOR
+    method_option :major, default: false, desc: SemanticVersion::MAJOR
+    method_option :smoke, default: false, desc: "Run tests after deployment"
     def on(environment="production")
       say "Makin it raaaaaain on #{environment}..."
       return unless working_directory_copasetic?
@@ -22,16 +22,13 @@ module Rain
         push_tag(tag)
       end
       run_cmd "bundle exec cap to_#{environment} deploy"
-      run_smoke_tests_for 'stage'
       say "It's a celebration, bitches!"
     end
 
   private
     no_tasks do
-      def run_smoke_tests_for environment
-        ENV['REMOTE_ENV'] = environment
-        ENV['SMOKE'] = 'true'
-        `bundle exec rspec spec/requests`
+      def run_smoke_tests
+        #run Rain.config.smoke_test_command
       end
 
       def tag

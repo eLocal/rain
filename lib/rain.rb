@@ -3,6 +3,7 @@ Bundler.require :default
 
 require 'rain/git_tools'
 require 'rain/deployer'
+require 'rain/semantic_version'
 require 'rails/all'
 
 #require 'pathname'
