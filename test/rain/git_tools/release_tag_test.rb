@@ -1,5 +1,5 @@
 require 'test_helper'
 
-class ReleaseTagTest < ActiveSupport::TestCase
-
+class GitTools::ReleaseTagTest < ActiveSupport::TestCase
+  
 end

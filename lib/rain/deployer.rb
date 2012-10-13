@@ -1,12 +1,11 @@
 require 'thor'
-require 'rain/semantic_version'
 
 module Rain
   class Deployer < Thor
     include Thor::Actions
     include GitTools
 
-    desc :on, "Tag current HEAD and push it to the chosen environment. (default: 'production')"
+    desc "on ENVIRONMENT", "Tag current HEAD and push it to the chosen environment. (default: 'production')"
     method_option :force, type: :boolean, desc: "Force a release, do not prompt", aliases: "-f"
     method_option :"keep-current-version", type: :boolean, desc: "Reuse the previous tag", aliases: "-k"
     method_option :patch, default: true,  desc: SemanticVersion::PATCH

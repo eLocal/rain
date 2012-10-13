@@ -1,9 +1,17 @@
 require 'thor'
 require_relative 'git_tools/release_tag'
 
+# A collection of methods and a class, +ReleaseTag+, for querying the
+# local Git repository. Originally part of the Thor binary, it was
+# extracted to its own module after +Rain::Deployer+ got too large.
 module GitTools
   include Thor::Actions
 
+  # A short user prompt if there are uncommitted changes in the repo, in
+  # case the user forgets before they deploy. Naturally, one may cancel
+  # this process effectively cancelling the entire deploy cleanly. This
+  # occurs before any hard changes (e.g., writing changes, pushes,
+  # command execution, etc.) are made.
   def working_directory_copasetic?
     return true if options[:force]
     return false unless no_changes_pending? || yes?("There are currently uncommitted changes.  Are you sure you want to continue? [y/N]")
@@ -32,7 +40,7 @@ module GitTools
 
   # Display name as set in +~/.gitconfig+
   def git_name
-    name = %x(git config --get user.name).split("\n")[0]
+    %x(git config --get user.name).split("\n")[0]
   end
 
   # Compares the latest Git tag with the latest version name in YAML. If
@@ -63,30 +71,38 @@ module GitTools
     end
   end
 
+  # Push a given +ReleaseTag+ to +origin+. You must have a Git
+  # remote set up for this to work.
   def push_tag(tag)
     unless tag.nil?
       run_cmd "git push origin #{tag}"
     end
   end
 
+  # Execute any shell commnad, unless we're testing. But always print
+  # what is/what would have been executed onto stdout.
   def run_cmd(cmd)
     puts "executing... #{cmd}"
-    %x(#{cmd})
+    %x(#{cmd}) unless ENV['RAILS_ENV'] == "test"
   end
 
+  # Full path of the versions.yml file in the Rails app.
   def versions_path
     File.expand_path "./config/versions.yml"
   end
 
+  # A YAML-parsed Hash of the versions.yml file.
   def versions_hash
     YAML.load_file(versions_path)
   end
 
+  # Write the newest ReleaseTag's version number to versions.yml, save
+  # it, and commit/push it to +origin/master+.
   def update_release_tag(environment, tag)
     hsh = versions_hash
     hsh[environment] = tag
     File.write(versions_path, hsh.to_yaml.to_s)
     run_cmd "git commit -m '[RELEASE][#{environment}] Update release tag for #{environment} to #{tag}' #{versions_path}"
-    run_cmd "git push"
+    run_cmd "git push origin master"
   end
 end
