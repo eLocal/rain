@@ -5,14 +5,14 @@ require_relative 'git_tools/release_tag'
 # local Git repository. Originally part of the Thor binary, it was
 # extracted to its own module after +Rain::Deployer+ got too large.
 module GitTools
-  include Thor::Actions
+  include Thor::Actions unless ENV['RAILS_ENV'] == 'test' # this is most likely temporary
 
   # A short user prompt if there are uncommitted changes in the repo, in
   # case the user forgets before they deploy. Naturally, one may cancel
   # this process effectively cancelling the entire deploy cleanly. This
   # occurs before any hard changes (e.g., writing changes, pushes,
   # command execution, etc.) are made.
-  def working_directory_copasetic?
+  def working_directory_copasetic?(options={})
     return true if options[:force]
     return false unless no_changes_pending? || yes?("There are currently uncommitted changes.  Are you sure you want to continue? [y/N]")
     return false unless on_master? || yes?("You are not currently on the master branch.  Are you sure you want to continue? [y/N]")

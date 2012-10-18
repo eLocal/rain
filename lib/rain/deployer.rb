@@ -17,7 +17,7 @@ module Rain
     def on environment="production"
       say "Makin it raaaaaain on #{environment}..."
 
-      return unless working_directory_copasetic?
+      return unless working_directory_copasetic?(options)
 
       unless options[:"keep-current-version"] or environment == 'production'
         update_release_tag(environment, tag.to_s)
