@@ -15,7 +15,6 @@ module Rain
     method_option :smoke, default: false, desc: "Run tests after deployment"
 
     def on environment="production"
-
       say "Makin it raaaaaain on #{environment}..."
 
       return unless working_directory_copasetic?
@@ -24,6 +23,8 @@ module Rain
         update_release_tag(environment, tag.to_s)
         run_cmd("git tag #{tag.to_s}")
         push_tag(tag)
+      else
+        say "Deploying existing tag #{GitTools::ReleaseTag.current} to '#{environment}'."
       end
 
       run_cmd "bundle exec cap to_#{environment} deploy"

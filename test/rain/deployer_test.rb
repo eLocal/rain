@@ -4,8 +4,8 @@ class Rain::DeployerTest < ActiveSupport::TestCase
   describe "DeployerTest: bare invocation" do
     before { @command = %x(./bin/rain) }
 
-    should "show a list of tasks" do
-      assert_match /Tasks:/, @command
+    should "deploy to production" do
+      assert_match /Makin it raaaaaain on production/, @command
     end
   end
 
