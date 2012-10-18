@@ -40,23 +40,44 @@ class Rain::GitToolsTest < ActiveSupport::TestCase
   end
 
   describe "GitTools: last_release_tag" do
+    setup { %x(git tag rel_9.9.999) }
+
     should "return the last release_tag entered into git" do
-      assert %x(git tag rel_9.9.999)
       assert_equal ReleaseTag.latest, last_release_tag
-      assert %x(git tag -d rel_9.9.999)
     end
+
+    teardown { %x(git tag -d rel_9.9.999) }
   end
 
-  #describe "GitTools: git_name" do
-    #should "return the name set in ~/.gitconfig" do
+  describe "GitTools: git_name" do
+    setup { @original_name = %x(git config user.name); %x(git config user.name "OJ Simpson") }
 
-    #end
-  #end
+    should "return the name set in ~/.gitconfig" do
+      assert_equal "OJ Simpson", git_name
+    end
 
-  #describe "GitTools: tagged_latest_version?" do
-    #should "return true when the current tag and the latest-released tag are the same"
-    #should "return false when the current tag has not been pushed"
-  #end
+    teardown { %x(git config user.name "#{@original_name}") }
+  end
+
+  describe "GitTools: tagged_latest_version?" do
+    setup { %x(git tag rel_0.0.1) }
+
+    should "return true when the current tag and the latest-released tag are the same" do
+      refute_nil ReleaseTag.current
+      puts "current: #{ReleaseTag.current}"
+      refute_nil ReleaseTag.latest
+      puts "latest: #{ReleaseTag.latest}"
+      assert tagged_latest_version?, "Latest version not tagged"
+    end
+
+    should "return false when the current tag has not been pushed" do
+      assert %x(git tag rel_9.9.999), "Couldn't create latest tag"
+      refute tagged_latest_version?, "Latest version tagged"
+      assert %x(git tag -d rel_9.9.999), "Couldn't delete tag"
+    end
+    
+    teardown { %x(git tag -d rel_9.9.998) }
+  end
 
   #describe "GitTools: push_tag" do
     #should "push the tag to origin/master"

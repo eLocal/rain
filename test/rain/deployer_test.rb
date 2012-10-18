@@ -2,11 +2,19 @@ require 'test_helper'
 
 class Rain::DeployerTest < ActiveSupport::TestCase
   describe "DeployerTest: bare invocation" do
-    before { @command = %x(./bin/rain) }
+    before do
+      %x(mkdir -p config)
+      unless IO.read('test/dummy/config/versions.yml') == IO.read("#{Rails.root}/config/versions.yml")
+        %x(cp test/dummy/config/versions.yml #{Rails.root}/config/versions.yml)
+      end
+      @command = %x(./bin/rain)
+    end
 
     should "deploy to production" do
       assert_match /Makin it raaaaaain on production/, @command
     end
+
+    after { %x(rm -rf config/) }
   end
 
   describe "DeployerTest: help invocation for 'on'" do
