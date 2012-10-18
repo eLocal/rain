@@ -29,8 +29,7 @@ module GitTools
 
     # Return the current ReleaseTag as specified in versions.yml.
     def self.current environment="production"
-      version = YAML::load_file(Rain.versions)[environment]
-      ReleaseTag.new(version)
+      ReleaseTag.new(Rain.version[environment])
     end
 
     # Return the latest ReleaseTag as computed by looking at the most
