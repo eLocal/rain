@@ -27,6 +27,10 @@ module GitTools
       "rel_" + to_a.compact.join(".")
     end
 
+    def ==(rel_tag)
+      to_a == rel_tag.to_a
+    end
+
     # Return the current ReleaseTag as specified in versions.yml.
     def self.current environment="production"
       ReleaseTag.new(Rain.version[environment])
