@@ -22,7 +22,7 @@ class Rain::GitToolsTest < ActiveSupport::TestCase
       assert %x(git checkout -b some-branch > /dev/null), "some-branch not checked out"
       refute on_master?
 
-      assert %x(git checkout #{original_branch}), "master not checked out"
+      assert %x(git checkout #{original_branch} > /dev/null), "master not checked out"
       assert %x(git branch -d some-branch > /dev/null), "some-branch was not deleted"
     end
   end
