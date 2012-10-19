@@ -29,6 +29,8 @@ module Rain
 
       run_cmd "bundle exec cap to_#{environment} deploy"
 
+      BugTracker.deliver_all_finished_stories!
+
       say "It's a celebration, bitches!"
     end
 
