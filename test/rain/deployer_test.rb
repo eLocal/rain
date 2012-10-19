@@ -3,7 +3,14 @@ require 'test_helper'
 class Rain::DeployerTest < ActiveSupport::TestCase
   describe "DeployerTest: bare invocation" do
     setup do
-      %x(mkdir -p config && touch config/versions.yml)
+      %x(mkdir -p config)
+      @config = File.new File.expand_path('./config/versions.yml'), 'w' do |f|
+        f.puts <<YAML
+---
+stage: rel_0.0.1
+production: rel_0.0.1
+YAML
+      end
       @command = %x(./bin/rain)
     end
 
