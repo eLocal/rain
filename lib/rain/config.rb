@@ -4,8 +4,8 @@ module Rain
   class Config
     attr_reader :yaml_file
 
-    def initialize
-      @yaml_file = YAML::load_file "#{Rails.root}/config/versions.yml"
+    def initialize(root)
+      @yaml_file = YAML::load_file "#{root}/config/versions.yml"
     end
 
     def versions
