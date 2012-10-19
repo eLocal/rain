@@ -60,13 +60,11 @@ class Rain::GitToolsTest < ActiveSupport::TestCase
   end
 
   describe "GitTools: tagged_latest_version?" do
-    setup { %x(git tag rel_0.0.1) }
+    setup { %x(git tag -d rel_0.0.1 && git tag rel_0.0.1) }
 
     should "return true when the current tag and the latest-released tag are the same" do
       refute_nil ReleaseTag.current
-      puts "current: #{ReleaseTag.current}"
       refute_nil ReleaseTag.latest
-      puts "latest: #{ReleaseTag.latest}"
       assert tagged_latest_version?, "Latest version not tagged"
     end
 
