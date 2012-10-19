@@ -1,3 +1,5 @@
+require 'active_support/all'
+
 module Rain
   # Holds the configuration options for Rain from versions.yml in a
   # HashWithIndifferentAccess.

@@ -12,18 +12,18 @@ class Rain::GitToolsTest < ActiveSupport::TestCase
 
   describe "GitTools: on_master?" do
     should "return true when we are on the master branch" do
-      assert %x(git checkout master), "master not checked out"
+      assert %x(git checkout master > /dev/null), "master not checked out"
       assert on_master?
     end
 
     should "return false when we are on any other branch" do
       original_branch = %x(git branch | grep '*').gsub! /\*\s|\n/, ""
       assert_equal 'master', original_branch
-      assert %x(git checkout -b some-branch), "some-branch not checked out"
+      assert %x(git checkout -b some-branch > /dev/null), "some-branch not checked out"
       refute on_master?
 
       assert %x(git checkout #{original_branch}), "master not checked out"
-      assert %x(git branch -d some-branch), "some-branch was not deleted"
+      assert %x(git branch -d some-branch > /dev/null), "some-branch was not deleted"
     end
   end
 
