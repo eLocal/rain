@@ -2,11 +2,8 @@ require 'test_helper'
 
 class Rain::DeployerTest < ActiveSupport::TestCase
   describe "DeployerTest: bare invocation" do
-    before do
-      %x(mkdir -p config)
-      unless IO.read('test/dummy/config/versions.yml') == IO.read("#{Rails.root}/config/versions.yml")
-        %x(cp test/dummy/config/versions.yml #{Rails.root}/config/versions.yml)
-      end
+    setup do
+      %x(mkdir -p config && touch config/versions.yml)
       @command = %x(./bin/rain)
     end
 
@@ -14,7 +11,7 @@ class Rain::DeployerTest < ActiveSupport::TestCase
       assert_match /Makin it raaaaaain on production/, @command
     end
 
-    after { %x(rm -rf config/) }
+    teardown { %x(rm -rf config/) }
   end
 
   describe "DeployerTest: help invocation for 'on'" do
