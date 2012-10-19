@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.8"
   s.add_runtime_dependency "thor"
   s.add_runtime_dependency "capistrano"
+  s.add_runtime_dependency "pivotal-tracker"
 
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'turn'

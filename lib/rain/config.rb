@@ -7,15 +7,24 @@ module Rain
     attr_reader :yaml_file
 
     def initialize(root)
-      @yaml_file = YAML::load_file "#{root}/config/versions.yml"
+      @versions_yml = YAML::load_file "#{root}/config/versions.yml"
+      @tracker_yml = YAML::load_file "#{root}/config/tracker.yml"
     end
 
     def versions
-      @versions ||= if @yaml_file.present?
-                      ActiveSupport::HashWithIndifferentAccess.new @yaml_file
+      @versions ||= if @versions_yml.present?
+                      ActiveSupport::HashWithIndifferentAccess.new @versions_yml
                     else
                       false
                     end
+    end
+
+    def tracker
+      @tracker ||= if @tracker_yml.present?
+                      ActiveSupport::HashWithIndifferentAccess.new @tracker_yml
+                   else
+                     false
+                   end
     end
   end
 end

@@ -20,13 +20,23 @@ end
 class ActiveSupport::TestCase
   setup do
     %x(mkdir -p config)
-    file = File.open File.expand_path('./config/versions.yml'), 'w' do |f|
+    versions = File.open File.expand_path('./config/versions.yml'), 'w' do |f|
       f.puts <<YAML
 ---
 stage: rel_0.0.1
 production: rel_0.0.1
 YAML
     end
+
+    tracker = File.open File.expand_path('./config/tracker.yml'), 'w' do |f|
+      f.puts <<YAML
+---
+username: 'test@example.com'
+password: 'w00tw00t'
+project_id: 1
+YAML
+    end
+
   end
 
   teardown do
