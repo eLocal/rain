@@ -60,7 +60,7 @@ class Rain::GitToolsTest < ActiveSupport::TestCase
   end
 
   describe "GitTools: tagged_latest_version?" do
-    setup { %x(git tag -d rel_0.0.1 && git tag rel_0.0.1) }
+    setup { %x(git tag rel_0.0.1) }
 
     should "return true when the current tag and the latest-released tag are the same" do
       refute_nil ReleaseTag.current
@@ -69,12 +69,12 @@ class Rain::GitToolsTest < ActiveSupport::TestCase
     end
 
     should "return false when the current tag has not been pushed" do
-      assert %x(git tag rel_9.9.999), "Couldn't create latest tag"
+      assert %x(git tag rel_0.0.2), "Couldn't create latest tag"
       refute tagged_latest_version?, "Latest version tagged"
-      assert %x(git tag -d rel_9.9.999), "Couldn't delete tag"
+      assert %x(git tag -d rel_0.0.2), "Couldn't delete tag"
     end
     
-    teardown { %x(git tag -d rel_9.9.998) }
+    teardown { %x(git tag -d rel_0.0.1) }
   end
 
   #describe "GitTools: push_tag" do
