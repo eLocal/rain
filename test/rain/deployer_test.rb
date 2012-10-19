@@ -2,24 +2,10 @@ require 'test_helper'
 
 class Rain::DeployerTest < ActiveSupport::TestCase
   describe "DeployerTest: bare invocation" do
-    setup do
-      %x(mkdir -p config)
-      file = File.open File.expand_path('./config/versions.yml'), 'w' do |f|
-        f.puts <<YAML
----
-stage: rel_0.0.1
-production: rel_0.0.1
-YAML
-      end
-      @command = %x(./bin/rain)
-    end
+    setup { @command = %x(./bin/rain) }
 
     should "deploy to production" do
       assert_match /Makin it raaaaaain on production/, @command
-    end
-
-    teardown do 
-      %x(rm -rf config/)
     end
   end
 
