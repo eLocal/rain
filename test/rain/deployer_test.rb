@@ -4,7 +4,7 @@ class Rain::DeployerTest < ActiveSupport::TestCase
   describe "DeployerTest: bare invocation" do
     setup do
       %x(mkdir -p config)
-      @config = File.new File.expand_path('./config/versions.yml'), 'w' do |f|
+      file = File.open File.expand_path('./config/versions.yml'), 'w' do |f|
         f.puts <<YAML
 ---
 stage: rel_0.0.1
@@ -18,7 +18,9 @@ YAML
       assert_match /Makin it raaaaaain on production/, @command
     end
 
-    teardown { %x(rm -rf config/) }
+    teardown do 
+      %x(rm -rf config/)
+    end
   end
 
   describe "DeployerTest: help invocation for 'on'" do
