@@ -41,14 +41,28 @@ roll back changes without keeping a bunch of directories on the server
 filled with ancient app code, as well as see at-a-glance when new
 deployments occurred.
 
-### Creating the deploy task
+### Configuration
 
 You need a `to_{env}` task in your `config/deploy.rb` for whatever
 environment you wish to deploy. The Rails environment, task and
 environment in the versions.yml file must be the same name. This task 
 will tell Capistrano which servers to deploy to before it runs its
 `deploy` task. It basically configures Capistrano on a per-environment
-basis.
+basis. 
+
+Here's what one of your `to_env` tasks might like:
+
+```ruby
+desc "Let's gooooooooooooo"
+task :to_production do
+  set :user, "bruce"
+  set :rails_env, "production"
+
+  role :web,  "www.elocal.com"
+  role :app,  "dyno.elocal.com"
+  role :db,   "production.db.elocal.com", primary: true
+end
+```
 
 ### Deploying
 
