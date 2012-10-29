@@ -5,7 +5,7 @@ class Rain::DeployerTest < ActiveSupport::TestCase
     setup { @command = %x(./bin/rain) }
 
     should "deploy to production" do
-      assert_match /Makin it raaaaaain on production/, @command
+      assert_match 'Got a handful of stacks better grab an umbrella', @command
     end
   end
 
