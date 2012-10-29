@@ -11,11 +11,15 @@ require 'rain/git_tools'
 
 module Rain
   Capistrano::Configuration.instance(:must_exist).load do
-    after "to_stage", "to_latest_tag"
-    after "to_production", "to_latest_tag"
+    after "to_stage",       "to_latest_tag"
+    after "to_production",  "to_latest_tag"
 
     task :to_latest_tag do
-      set :branch, GitTools::ReleaseTag.current(rails_env)
+      if rails_env == 'stage'
+        set :branch, GitTools::ReleaseTag.current(rails_env)
+      else
+        set :branch, GitTools::ReleaseTag.latest
+      end
     end
   end
 end

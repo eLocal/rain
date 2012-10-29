@@ -15,7 +15,7 @@ module Rain
     method_option :smoke, default: false, desc: "Run tests after deployment"
 
     def on environment="production"
-      say "Makin it raaaaaain on #{environment}..."
+      say "Making it rain on #{environment}..."
 
       return unless working_directory_copasetic?(options)
 
@@ -29,7 +29,7 @@ module Rain
 
       run_cmd "bundle exec cap to_#{environment} deploy"
 
-      say "It's a celebration, bitches!"
+      say "Got a handful of stacks better grab an umbrella."
     end
 
     default_task :on
