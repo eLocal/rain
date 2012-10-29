@@ -41,14 +41,19 @@ roll back changes without keeping a bunch of directories on the server
 filled with ancient app code, as well as see at-a-glance when new
 deployments occurred.
 
+Meant for deployment to two environments, it deploys the latest `HEAD`
+from Git's master branch to stage and the last released tag on stage to
+production.
+
 ### Configuration
 
-You need a `to_{env}` task in your `config/deploy.rb` for whatever
-environment you wish to deploy. The Rails environment, task and
-environment in the versions.yml file must be the same name. This task 
-will tell Capistrano which servers to deploy to before it runs its
-`deploy` task. It basically configures Capistrano on a per-environment
-basis. 
+Rain implies that you deploy to two environments, a **stage** for
+testing new changes on a real server, with real API calls, and the
+**production** environment which is where your application can be
+interacted with by its userbase.
+
+You need a `to_stage` and `to_production` task in your
+**config/deploy.rb** for whatever environment you wish to deploy. The Rails environment, task and environment in the versions.yml file must be the same name. This task will tell Capistrano which servers to deploy to before it runs its `deploy` task. It basically configures Capistrano on a per-environment basis. 
 
 Here's what one of your `to_env` tasks might like:
 
