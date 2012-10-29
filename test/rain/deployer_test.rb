@@ -14,7 +14,7 @@ class Rain::DeployerTest < ActiveSupport::TestCase
       before { @command ||= %x(./bin/rain on stage) }
 
       should "deploy a new tag to stage" do
-        assert_match 'Deploying existing tag', @command
+        assert_match 'executing... git push origin rel_', @command
       end
     end
 
