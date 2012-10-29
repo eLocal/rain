@@ -42,7 +42,7 @@ module GitTools
   def git_name
     %x(git config --get user.name).split("\n")[0]
   end
-  alias git_name deployer
+  alias deployer git_name
 
   # Compares the latest Git tag with the latest version name in YAML. If
   # both of those are equal, this returns +true+, because the Git tags
