@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
   s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
-  s.add_dependency "rails", "~> 3.2.8"
+  s.add_runtime_dependency "rails", "~> 3.2.8"
   s.add_runtime_dependency "thor"
   s.add_runtime_dependency "capistrano"
 
@@ -31,4 +31,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'guard-minitest'
   s.add_development_dependency 'guard-bundler'
   s.add_development_dependency 'pg'
+  s.add_development_dependency 'mini_specunit'
+  s.add_development_dependency 'mini_shoulda'
+  s.add_development_dependency 'jquery-rails'
 end

@@ -7,7 +7,7 @@ require "rails/test_help"
 Rails.backtrace_cleaner.remove_silencers!
 
 require 'bundler'
-Bundler.require :default, :test
+Bundler.require :default, :development
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
@@ -20,7 +20,7 @@ end
 class ActiveSupport::TestCase
   setup do
     %x(mkdir -p config)
-    file = File.open File.expand_path('./config/versions.yml'), 'w' do |f|
+    File.open File.expand_path('./config/versions.yml'), 'w' do |f|
       f.puts <<YAML
 ---
 stage: rel_0.0.1
