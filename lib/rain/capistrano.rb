@@ -29,7 +29,7 @@ module Rain
     namespace :deploy do
       desc "Send deployment notification email to the development team, set by the `:developers` setting in your config/deploy.rb."
       task :email, :role => :app do
-        unless developers.blank? or developers.nil?
+        unless developers.blank?
           versions = YAML.load_file(Pathname(__FILE__).dirname.expand_path.join('versions.yml'))
 
           body = if !versions.nil? and versions[rails_env]
