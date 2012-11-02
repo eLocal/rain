@@ -3,7 +3,7 @@ module Rain
     source_root File.expand_path('../templates', __FILE__)
 
     def copy_config_file
-      copy_file "config/versions.yml", "#{Rails.root}/config/versions.yml"
+      copy_file "versions.yml", "config/versions.yml"
     end
 
     def show_capistrano_instructions
