@@ -1,0 +1,10 @@
+Description:
+    Generates the configuration file for Rain
+    and instructs the user on how to install
+    the Capistrano tasks.
+
+Example:
+    rails generate rain:install
+
+    This will create:
+        config/version.yml
