@@ -12,11 +12,7 @@ ENV['BUNDLE_GEMFILE'] ||= File.expand_path("../../Gemfile", Pathname.new(__FILE_
 
 module Rain
   def self.version
-    root_path = if ENV['RAILS_ENV'] == 'test'
-                  File.expand_path './'
-                else
-                  Rails.root
-                end
+    root_path = File.expand_path './'
     config = Rain::Config.new root_path
     config.versions
   end
