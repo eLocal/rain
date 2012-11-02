@@ -16,6 +16,8 @@ module Rain
 
           rain on {environment}
 
+      Consult http://github.com/eLocal/rain/wiki for more information.
+
       TEXT
     end
   end
