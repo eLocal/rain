@@ -10,7 +10,7 @@ test:
   database: rain_dummy_test
   pool: 5
   timeout: 5000
-  user: rain
+  user: postgres
 
 production:
   adapter: postgresql
