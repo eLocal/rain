@@ -4,6 +4,7 @@ development:
   pool: 5
   timeout: 5000
   user: rain
+  host: localhost
 
 test:
   adapter: postgresql
@@ -11,6 +12,7 @@ test:
   pool: 5
   timeout: 5000
   user: postgres
+  host: localhost
 
 production:
   adapter: postgresql
@@ -18,3 +20,4 @@ production:
   pool: 5
   timeout: 5000
   user: rain
+  host: localhost
