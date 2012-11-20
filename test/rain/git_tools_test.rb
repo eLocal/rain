@@ -31,9 +31,6 @@ class Rain::GitToolsTest < ActiveSupport::TestCase
     should "return false when there are uncommitted changes" do
       assert %x(echo "test" >> LICENSE.md), "LICENSE.md was not edited"
       refute no_changes_pending?, "LICENSE.md is still clean"
-    end
-
-    should "return true when the directory is clean" do
       assert %x(git checkout HEAD LICENSE.md), "LICENSE.md not reset to HEAD state"
       assert no_changes_pending?, "LICENSE.md is still dirty. Make sure you commit everything else!"
     end
