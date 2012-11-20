@@ -1,5 +1,5 @@
 require 'bundler'
-Bundler.require :default
+Bundler.setup
 
 require 'rain/semantic_version'
 require 'rain/config'
