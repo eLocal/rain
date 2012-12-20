@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rain (1.0.4)
+    rain (1.0.5)
       capistrano
       rails (~> 3.2.8)
       thor
