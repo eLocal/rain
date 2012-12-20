@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name        = "rain"
   s.version     = Rain::VERSION
   s.authors     = ["Tom Scott", "Rob Di Marco"]
-  s.email       = ["tom.scott@elocal.com", "rob@elocal.com"]
+  s.email       = ["tom.scott@elocal.com"]
   s.homepage    = "http://github.com/eLocal/rain"
   s.summary     = "Rain is a single-command deployment engine for Rails applications."
   s.description = <<-TEXT
