@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>rain by eLocal</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>rain</h1>
+        <h2>by eLocal</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/eLocal/rain/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/eLocal/rain/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/eLocal/rain" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <p><img src="http://i.imgur.com/7uaxn.gif" alt="make it rain"></p>
+
+<h1>make it rain</h1>
+
+<p><strong>rain</strong> is deployment sugar for Rails applications. It leverages
+Capistrano and Git to cleanly deploy new versions across multiple
+servers. Essentially a command-line interface to both of these tools,
+Rain emphasizes convention over configuration and attempts to make
+continuous deployment between teams more organized and therefore, more
+effective.</p>
+
+<p>We use this deployment script at <a href="http://elocal.com">eLocal</a> to deploy a
+cluster of staging and production web app servers. Not only do we use it
+for our main site, but the API application as well, which was the
+primary motivation in developing this gem: the ability to share its code
+across all of our applications.</p>
+
+<h2>install it</h2>
+
+<div class="highlight"><pre><span class="nv">$ </span>gem install rain
+</pre></div>
+
+<p>or add the following to Gemfile:</p>
+
+<div class="highlight"><pre><span class="n">gem</span> <span class="s1">'rain'</span>
+</pre></div>
+
+<h2>use it</h2>
+
+<p>Read the <a href="http://rdoc.info/github/eLocal/rain/master/frames">documentation</a> for more info on how to use Rain with your Rails app.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
