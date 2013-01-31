@@ -33,4 +33,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'mini_specunit'
   s.add_development_dependency 'mini_shoulda'
   s.add_development_dependency 'jquery-rails'
+
+  s.signing_key = "/Users/tom/.gem/auth/private_key.pem"
+  s.cert_chain = ['gem-public-cert.pem']
 end
