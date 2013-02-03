@@ -27,8 +27,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "capistrano"
 
   s.add_development_dependency 'minitest'
-  s.add_development_dependency 'guard-minitest'
-  s.add_development_dependency 'guard-bundler'
   s.add_development_dependency 'pg'
   s.add_development_dependency 'mini_specunit'
   s.add_development_dependency 'mini_shoulda'
