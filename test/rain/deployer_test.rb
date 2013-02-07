@@ -1,8 +1,16 @@
 require 'test_helper'
 
 class Rain::DeployerTest < ActiveSupport::TestCase
+  def git_changes_pending?
+    @git_changes_pending ||= %x(git status --porcelain).split("\n").length > 0
+  end
+  
+  def no_git_changes!
+    raise "Pending commits, cannot run deployer test" if git_changes_pending?
+  end
+  
   describe "DeployerTest: bare invocation" do
-    before { @command ||= %x(./bin/rain) }
+    before { no_git_changes!; @command ||= %x(./bin/rain) }
 
     should "deploy to production" do
       assert_match 'Got a handful of stacks better grab an umbrella', @command
@@ -11,7 +19,7 @@ class Rain::DeployerTest < ActiveSupport::TestCase
 
   describe "DeployerTest: specific environment invocation" do
     context "on stage" do
-      before { @command ||= %x(./bin/rain on stage) }
+      before { no_git_changes!; @command ||= %x(./bin/rain on stage) }
 
       should "deploy a new tag to stage" do
         assert_match 'executing... git push origin rel_', @command
@@ -19,7 +27,7 @@ class Rain::DeployerTest < ActiveSupport::TestCase
     end
 
     context "on production" do
-      before { @command ||= %x(./bin/rain on production) }
+      before { no_git_changes!; @command ||= %x(./bin/rain on production) }
 
       should "deploy the same tag that's on stage to production" do
         assert_match 'Deploying existing tag', @command
@@ -28,7 +36,7 @@ class Rain::DeployerTest < ActiveSupport::TestCase
   end
 
   describe "DeployerTest: help invocation for 'on'" do
-    before { @command ||= %x(./bin/rain help on) }
+    before { no_git_changes!; @command ||= %x(./bin/rain help on) }
 
     should "prompt for an environment" do
       assert_match 'rain on ENVIRONMENT', @command
