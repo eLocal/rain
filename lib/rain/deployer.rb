@@ -19,7 +19,7 @@ module Rain
 
       return unless working_directory_copasetic?(options)
 
-      unless options[:"keep-current-version"] or environment == 'production'
+      unless options[:"keep-current-version"] || environment == 'production'
         update_release_tag(environment, tag.to_s)
         run_cmd("git tag #{tag.to_s}")
         push_tag(tag)
