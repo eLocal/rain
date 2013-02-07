@@ -15,11 +15,7 @@ module Rain
     after "to_production",  "to_latest_tag"
 
     task :to_latest_tag do
-      if rails_env == 'stage'
-        set :branch, GitTools::ReleaseTag.current(rails_env)
-      else
-        set :branch, GitTools::ReleaseTag.latest
-      end
+      set :branch, GitTools::ReleaseTag.current(rails_env)
     end
   end
 end
