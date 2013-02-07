@@ -1,4 +1,0 @@
----
-stage: rel_0.0.1
-test: rel_0.0.1
-production: rel_0.0.1

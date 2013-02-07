@@ -89,7 +89,11 @@ module GitTools
 
   # Full path of the versions.yml file in the Rails app.
   def versions_path
-    File.expand_path "./config/versions.yml"
+    if ENV['RAILS_ENV'] == 'test'
+      File.expand_path "./test/dummy/config/versions.yml"
+    else
+      File.expand_path "./config/versions.yml" # stage, prod, etc.
+    end
   end
 
   # A YAML-parsed Hash of the versions.yml file.
@@ -101,7 +105,7 @@ module GitTools
   # it, and commit/push it to +origin/master+.
   def update_release_tag(environment, tag)
     hsh = versions_hash
-    hsh[environment] = tag
+    hsh[environment] = tag.to_s
     File.write(versions_path, hsh.to_yaml.to_s)
     run_cmd "git commit -m '[RELEASE][#{environment}] Update release tag for #{environment} to #{tag}' #{versions_path}"
     run_cmd "git push origin master"

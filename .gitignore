@@ -8,3 +8,4 @@ test/dummy/.sass-cache
 config/**
 doc/**
 **.DS_Store
+test/dummy/config/versions.yml

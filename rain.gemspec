@@ -32,6 +32,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'mini_shoulda'
   s.add_development_dependency 'jquery-rails'
 
-  s.signing_key = "/Users/tom/.gem/auth/private_key.pem"
+  s.signing_key = "/usr/local/lib/ruby/gems/1.9.1/auth/rain.pem"
   s.cert_chain = ['gem-public-cert.pem']
 end

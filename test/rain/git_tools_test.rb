@@ -70,7 +70,7 @@ class Rain::GitToolsTest < ActiveSupport::TestCase
       refute tagged_latest_version?, "Latest version tagged"
       assert %x(git tag -d rel_0.0.2), "Couldn't delete tag"
     end
-    
+
     teardown { %x(git tag -d rel_0.0.1) }
   end
 
@@ -83,16 +83,36 @@ class Rain::GitToolsTest < ActiveSupport::TestCase
     #should "execute the given shell command"
   #end
 
-  #describe "GitTools: versions_path" do
-    #should "return the full path to the versions.yml file"
-  #end
+  describe "GitTools: versions_path" do
+    should "return the full path to the versions.yml file" do
+      assert_equal versions_path, File.expand_path('./test/dummy/config/versions.yml')
+    end
+  end
 
-  #describe "GitTools: versions_hash" do
-    #should "return a YAML Hash of the versions.yml file"
-  #end
+  describe "GitTools: versions_hash" do
+    should "be a hash from YAML" do
+      assert versions_hash.is_a? Hash
+    end
 
-  #describe "GitTools: update_release_tag" do
-    #should "write the versions_hash to versions.yml"
-    #should "commit and push that change to origin/master"
-  #end
+    should "have an entry for both environments" do
+      %w(stage production).each { |env| refute_nil versions_hash[env] }
+    end
+
+    should "include the String of each ReleaseTag as the value" do
+      %w(stage production).each do |env|
+        assert versions_hash[env].is_a? String
+        assert_equal versions_hash[env], 'rel_0.0.1'
+      end
+    end
+  end
+
+  describe "GitTools: update_release_tag" do
+    setup { update_release_tag 'stage', ReleaseTag.new('rel_0.0.2') }
+
+    should "write the versions_hash to versions.yml" do
+      yaml_for = YAML::load_file(versions_path)
+
+      assert_equal yaml_for['stage'], 'rel_0.0.2'
+    end
+  end
 end
