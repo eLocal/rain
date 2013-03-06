@@ -77,6 +77,7 @@ module GitTools
   def push_tag(tag)
     unless tag.nil?
       run_cmd "git push origin #{tag}"
+      raise "Error: Push failed and deploy has been cancelled" if $?.exitstatus > 0
     end
   end
 
