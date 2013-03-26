@@ -85,7 +85,7 @@ module GitTools
   # what is/what would have been executed onto stdout.
   def run_cmd(cmd)
     puts "executing... #{cmd}"
-    Bundler.clean_exec cmd unless testing?
+    Bundler.with_clean_env { %x(#{cmd}) } unless testing?
   end
 
   def testing?
