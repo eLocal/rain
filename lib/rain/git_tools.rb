@@ -85,7 +85,11 @@ module GitTools
   # what is/what would have been executed onto stdout.
   def run_cmd(cmd)
     puts "executing... #{cmd}"
-    %x(#{cmd}) unless ENV['RAILS_ENV'] == "test"
+    Bundler.with_clean_env { %x(#{cmd}) } unless testing?
+  end
+
+  def testing?
+    ENV['RAILS_ENV'] == "test"
   end
 
   # Full path of the versions.yml file in the Rails app.

@@ -3,7 +3,7 @@ PATH
   specs:
     rain (1.0.8)
       capistrano
-      rails (~> 3.2.8)
+      rails
       thor
 
 GEM
