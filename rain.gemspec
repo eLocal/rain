@@ -25,6 +25,10 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "rails"
   s.add_runtime_dependency "thor"
   s.add_runtime_dependency "capistrano"
+  s.add_runtime_dependency "capistrano_colors"
+  s.add_runtime_dependency "newrelic_rpm"
+  s.add_runtime_dependency "airbrake"
+  s.add_runtime_dependency "flowdock"
 
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'pg'
