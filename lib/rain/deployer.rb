@@ -9,10 +9,10 @@ module Rain
 
     method_option :force, type: :boolean, desc: "Force a release, do not prompt", aliases: "-f"
     method_option :"keep-current-version", type: :boolean, desc: "Reuse the previous tag", aliases: "-k"
-    method_option :patch, default: true,  desc: SemanticVersion::PATCH
-    method_option :minor, default: false, desc: SemanticVersion::MINOR
-    method_option :major, default: false, desc: SemanticVersion::MAJOR
-    method_option :smoke, default: false, desc: "Run tests after deployment"
+    method_option :patch, default: true,  desc: SemanticVersion::PATCH, type: :boolean
+    method_option :minor, default: false, desc: SemanticVersion::MINOR, type: :boolean
+    method_option :major, default: false, desc: SemanticVersion::MAJOR, type: :boolean
+    method_option :smoke, default: false, desc: "Run tests after deployment", type: :boolean
 
     def on environment="production"
       say "Making it rain on #{environment}..."
