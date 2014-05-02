@@ -1,4 +1,5 @@
 require 'thor'
+require 'yaml'
 require_relative 'git_tools/release_tag'
 
 # A collection of methods and a class, +ReleaseTag+, for querying the
