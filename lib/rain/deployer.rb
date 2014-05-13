@@ -12,8 +12,6 @@ module Rain
     method_option :patch, default: true,  desc: SemanticVersion::PATCH, type: :boolean
     method_option :minor, default: false, desc: SemanticVersion::MINOR, type: :boolean
     method_option :major, default: false, desc: SemanticVersion::MAJOR, type: :boolean
-    method_option :smoke, default: false, desc: "Run tests after deployment", type: :boolean
-
     def on environment="production"
       say "Making it rain on #{environment}..."
 
@@ -37,10 +35,6 @@ module Rain
 
   private
     no_tasks do
-      def run_smoke_tests
-        #run Rain.config.smoke_test_command
-      end
-
       def tag
         @tag ||= case true
           when options[:minor] then increment_minor_version
