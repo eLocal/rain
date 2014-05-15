@@ -7,12 +7,6 @@
 # deployment to the current ReleaseTag.
 
 require 'capistrano'
-require 'capistrano_colors'
-
-require 'flowdock/capistrano'
-require 'airbrake/capistrano'
-require 'bundler/capistrano'
-require 'new_relic/recipes'
 
 require 'rain/git_tools'
 
