@@ -22,20 +22,9 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
   s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
-  s.add_runtime_dependency "rails"
   s.add_runtime_dependency "thor"
-  s.add_runtime_dependency "capistrano"
-  s.add_runtime_dependency "capistrano_colors"
-  s.add_runtime_dependency "newrelic_rpm"
-  s.add_runtime_dependency "airbrake"
-  s.add_runtime_dependency "flowdock"
+  s.add_runtime_dependency "activesupport", ">= 3.2"
 
-  s.add_development_dependency 'minitest'
-  s.add_development_dependency 'pg'
-  s.add_development_dependency 'mini_specunit'
-  s.add_development_dependency 'mini_shoulda'
-  s.add_development_dependency 'jquery-rails'
-
-  #s.signing_key = "/usr/local/lib/ruby/gems/1.9.1/auth/rain.pem"
-  #s.cert_chain = ['gem-public-cert.pem']
+  s.add_development_dependency 'rake'
+  s.add_development_dependency "rspec"
 end
