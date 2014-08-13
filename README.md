@@ -68,7 +68,7 @@ programatically increment the major or minor version instead of the
 patch, which is the default (but can be explicitly set with `--patch`).
 
 ```bash
-$ rain on stage --minor
+$ rain on staging --minor
 $ rain on production --major
 ```
 

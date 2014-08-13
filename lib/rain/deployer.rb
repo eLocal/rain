@@ -22,8 +22,8 @@ module Rain
         run_cmd("git tag #{tag.to_s}")
         push_tag(tag)
       else
-        update_release_tag(environment, GitTools::ReleaseTag.current("stage"))
-        say "Deploying existing tag #{GitTools::ReleaseTag.current("stage")} to '#{environment}'."
+        update_release_tag(environment, GitTools::ReleaseTag.current("staging"))
+        say "Deploying existing tag #{GitTools::ReleaseTag.current("staging")} to '#{environment}'."
       end
 
       run_cmd "bundle exec cap #{environment} deploy"
