@@ -8,7 +8,7 @@ continuous deployment between teams more organized and therefore, more
 effective.
 
 Designed for [eLocal](http://elocal.com), it is
-currently in production use on several of our large applications. 
+currently in production use on several of our large applications.
 
 ## Installation
 
@@ -52,22 +52,7 @@ testing new changes on a real server, with real API calls, and the
 **production** environment which is where your application can be
 interacted with by its userbase.
 
-You need a `to_stage` and `to_production` task in your
-**config/deploy.rb** for whatever environment you wish to deploy. The Rails environment, task and environment in the versions.yml file must be the same name. This task will tell Capistrano which servers to deploy to before it runs its `deploy` task. It basically configures Capistrano on a per-environment basis. 
-
-Here's what one of your `to_env` tasks might like:
-
-```ruby
-desc "Let's gooooooooooooo"
-task :to_production do
-  set :user, "bruce"
-  set :rails_env, "production"
-
-  role :web,  "www.elocal.com"
-  role :app,  "dyno.elocal.com"
-  role :db,   "production.db.elocal.com", primary: true
-end
-```
+You need a `staging` and `production` stages, or whatever stages you wish to deploy. The Rails environment, task and environment in the versions.yml file must be the same name. This task will tell Capistrano which servers to deploy to before it runs its `deploy` task. It basically configures Capistrano on a per-environment basis.
 
 ### Deploying
 

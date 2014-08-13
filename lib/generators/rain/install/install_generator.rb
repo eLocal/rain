@@ -10,7 +10,7 @@ module Rain
       say <<-TEXT
 
       Please add `require 'rain/capistrano'` to Capfile and
-      define your :to_stage and :to_production tasks in config/deploy.rb.
+      define your stages in config/deploy
 
       Then, all you have to do to deploy to all of your servers is
 
