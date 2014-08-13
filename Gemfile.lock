@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rain (1.0.9)
+    rain (1.0.10)
       activesupport (>= 3.2)
       thor
 
