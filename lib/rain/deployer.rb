@@ -26,7 +26,7 @@ module Rain
         say "Deploying existing tag #{GitTools::ReleaseTag.current("staging")} to '#{environment}'."
       end
 
-      run_cmd "bundle exec cap #{environment} deploy"
+      run "bundle exec cap #{environment} deploy"
 
       say "Got a handful of stacks better grab an umbrella."
     end
